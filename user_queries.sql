@@ -19,5 +19,4 @@
 
 -- /*password - qwerty*/
 
-SELECT * FROM User
-WHERE username="palemale";
+SELECT * FROM User;
