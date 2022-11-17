@@ -17,6 +17,7 @@ import bcrypt
 
 class User:
     def __init__(self, username=None, f_name=None, l_name=None, password=None, status=False) -> None:
+        self.__id = None
         self.username = username
         self.__f_name = f_name
         self.__l_name = l_name
@@ -62,6 +63,14 @@ class User:
     @is_staff.setter
     def is_staff(self, is_staff):
         self.__is_staff = is_staff
+    
+    @property
+    def id(self):
+        return self.__id
+
+    @id.setter
+    def id(self, value):
+        self.__id = value
 
 palemale = User('abobaabobus', 'aboba', 'abobus', '1313141', 0)
 

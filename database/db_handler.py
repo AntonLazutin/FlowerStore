@@ -10,7 +10,7 @@ class Database:
         self.cursor.execute(query)
 
     def select(self, query):
-        self.cursor.execute(query)
+        self.query(query)
         return self.cursor.fetchall()
 
     def __enter__(self):

@@ -1,5 +1,5 @@
-from user import User
-from db_handler import Database
+from .user import User
+from database.db_handler import Database
 from config import DB_PATH
 
 class UserHandler:
@@ -21,6 +21,14 @@ class UserHandler:
             """)
 
     @staticmethod
+    def get_id(user):
+        with Database(DB_PATH) as db:
+            return db.select(f"""
+                SELECT id FROM User
+                WHERE username="{user.username}";
+            """)[0][0]
+
+    @staticmethod
     def get(username):
         with Database(DB_PATH) as db:
             return db.select(f"""
@@ -31,28 +39,30 @@ class UserHandler:
     def delete(self):
         pass
 
-    def update(self):
+    @staticmethod
+    def update(user):
         with Database(DB_PATH) as db:
             return db.query(f"""
-                UPDATE USER
-                SET username = "{self.User.username}"
-                    first_name = ""
-                    last_name = ""
-                    hashed_pass = ""
-                    is_staff = ""
+                UPDATE OR REPLACE USER
+                SET username = "{user.username}",
+                    first_name = "{user.f_name}",
+                    last_name = "{user.l_name}",
+                    is_staff = "{user.is_staff}"
+                WHERE id="{user.id}";
             """)
 
 
+Yulia = User("bagsea", "Yulia", "Zhur", "1234", 0)
 
-if __name__ == "__main__":    
-    for elem in UserHandler.get("palemale")[0]:
-        print(elem)
-
-
-Yulia = User("yulkamur", "Yulia", "Zhur", "1234", 0)
-
-print(Yulia.password)
 
 #UserHandler.save_user(Yulia)
 
-print(UserHandler.get(username='yulkamur')[0])
+
+#print(UserHandler.get(username='bagsea'))
+Yulia.id = UserHandler.get_id(Yulia)
+
+Yulia.username = "yulkamur"
+
+UserHandler.update(Yulia)
+
+

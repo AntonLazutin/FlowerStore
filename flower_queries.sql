@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS Flower (
-    id INTEGER PRIMARY KEY UNIQUE,
-    name TEXT NOT NULL UNIQUE,
-    price INTEGER NOT NULL,
-    quantity INTEGER
-);

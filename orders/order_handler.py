@@ -1,4 +1,4 @@
-from ..db_handler import Database
+from ..database.db_handler import Database
 from ..config import DB_PATH
 
 class OrderHandler:
